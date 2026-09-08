@@ -24,13 +24,7 @@ jobs:
       - name: Install
         run: bun install
       - name: Typecheck packages
-        run: |
-          bunx tsc --noEmit --project packages/core/tsconfig.json
-          bunx tsc --noEmit --project packages/specifier/tsconfig.json
-          bunx tsc --noEmit --project packages/cli/tsconfig.json
-          bunx tsc --noEmit --project packages/runtime/tsconfig.json
-          bunx tsc --noEmit --project packages/compiler/tsconfig.json
-          bunx tsc --noEmit --project packages/jit-plugin-solid/tsconfig.json
+        run: bunx nx run-many -t typecheck --projects=@fe/core,@fe/specifier,@fe/cli,@fe/runtime,@fe/compiler,@fe/jit-plugin-solid
 
   sandbox:
     runs-on: ubuntu-latest
@@ -50,11 +44,7 @@ jobs:
       - name: Install
         run: bun install
       - name: Typecheck sandbox
-        run: |
-          bunx tsc --noEmit --project sandbox/mfe-a/tsconfig.json
-          bunx tsc --noEmit --project sandbox/mfe-b/tsconfig.json
-          bunx tsc --noEmit --project sandbox/host-app/tsconfig.json
-          bunx tsc --noEmit --project toolkit/devtools/tsconfig.json
+        run: bunx nx run-many -t typecheck --projects=@conqueso/fe-mfe-a,@conqueso/fe-mfe-b,host-app,@fe/fe-devtools
       - name: Build sandbox
         run: |
           cd sandbox

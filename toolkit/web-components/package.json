@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "typecheck": "bunx tsc --noEmit",
+    "typecheck": "bunx tsgo --noEmit",
     "publish": "bunx deno publish --allow-dirty --config package.json"
   },
   "exports": {

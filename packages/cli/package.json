@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "bun build src/index.ts --outdir dist --format esm --target bun",
-    "typecheck": "bunx tsc --noEmit"
+    "typecheck": "bunx tsgo --noEmit"
   },
   "dependencies": {
     "@fe/compiler": "workspace:*",
@@ -20,7 +20,7 @@
     "@fe/specifier": "workspace:*"
   },
   "devDependencies": {
-    "bun-types": "latest",
-    "typescript": "^5.0.0"
+    "@typescript/native-preview": "latest",
+    "bun-types": "latest"
   }
 }

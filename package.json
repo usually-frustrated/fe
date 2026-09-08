@@ -14,8 +14,8 @@
     "@fe/cli": "workspace:*",
     "@playwright/test": "1.56.1",
     "@types/node": "^25.3.0",
+    "@typescript/native-preview": "latest",
     "glob": "^13.0.6",
-    "nx": "^22.5.2",
-    "typescript": "^5.9.3"
+    "nx": "^23.2.0"
   }
 }

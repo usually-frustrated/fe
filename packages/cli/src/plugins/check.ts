@@ -30,7 +30,7 @@ async function runCheck(ctx: CliContext, hooks: Hooks, args: string[]): Promise<
   }
 
   console.log(`- Running Typecheck`);
-  const proc = Bun.spawn(["bun", "x", "tsc", "--noEmit", "--project", join(dir, "tsconfig.json")], {
+  const proc = Bun.spawn(["bun", "x", "tsgo", "--noEmit", "--project", join(dir, "tsconfig.json")], {
     stdout: "inherit",
     stderr: "inherit",
   });

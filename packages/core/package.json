@@ -7,9 +7,9 @@
   },
   "scripts": {
     "build": "bun build src/index.ts --outdir dist --format esm --target bun",
-    "typecheck": "bunx tsc --noEmit"
+    "typecheck": "bunx tsgo --noEmit"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "@typescript/native-preview": "latest"
   }
 }

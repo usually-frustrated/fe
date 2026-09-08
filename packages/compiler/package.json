@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "bun build src/index.ts --outdir dist --format esm --target bun",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
     "@fe/core": "workspace:*",
@@ -14,7 +14,7 @@
     "solid-js": "^1.9.0"
   },
   "devDependencies": {
-    "bun-types": "^1.1.0",
-    "typescript": "^5.0.0"
+    "@typescript/native-preview": "latest",
+    "bun-types": "^1.1.0"
   }
 }

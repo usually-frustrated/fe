@@ -9,7 +9,7 @@
     "typecheck": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "bunx tsc --noEmit",
+        "command": "bunx tsgo --noEmit",
         "cwd": "{projectRoot}"
       }
     }
