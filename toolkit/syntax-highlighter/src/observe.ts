@@ -2,9 +2,27 @@ import { highlight } from './core.ts';
 
 export * from './core.ts';
 
-const hideSheet = new CSSStyleSheet();
-hideSheet.replaceSync('textarea[lang]{display:none}');
-document.adoptedStyleSheets = [...document.adoptedStyleSheets, hideSheet];
+const uiSheet = new CSSStyleSheet();
+uiSheet.replaceSync(`
+textarea[lang]{display:none}
+pre[data-linenumbers]{display:flex;align-items:flex-start;overflow-x:auto !important}
+pre[data-linenumbers] code{flex:1;min-width:max-content !important;display:block;white-space:pre !important}
+pre[data-linenumbers]::before{
+  content:attr(data-linenumbers);
+  white-space:pre;
+  text-align:right;
+  flex-shrink:0;
+  padding-right:1.5ch;
+  margin-right:1ch;
+  border-right:1px solid var(--ln-border,currentColor);
+  min-width:var(--ln-width,2ch);
+  opacity:var(--ln-opacity,.4);
+  color:var(--ln-color,currentColor);
+  user-select:none;
+  -webkit-user-select:none
+}
+`);
+document.adoptedStyleSheets = [...document.adoptedStyleSheets, uiSheet];
 
 const processed = new WeakSet<Element>();
 
@@ -15,6 +33,7 @@ function swapTextarea(ta: HTMLTextAreaElement): void {
     if (!lang) return;
     const pre = document.createElement('pre');
     pre.className = `lang-${lang}`;
+    if (ta.hasAttribute('data-linenumbers')) pre.dataset.linenumbers = '';
     const code = document.createElement('code');
     code.textContent = ta.value.trim();
     pre.appendChild(code);

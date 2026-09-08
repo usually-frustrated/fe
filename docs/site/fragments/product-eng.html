@@ -65,7 +65,7 @@
     live in <code>sessionStorage</code> and affect only your current tab. No redeployment,
     no asking anyone for access.
   </p>
-  <textarea lang="ts">
+  <textarea lang="ts" data-linenumbers>
 // manual sessionStorage override (without devtools)
 sessionStorage.setItem(
   "fe:override:@conqueso/fe-my-feature",
@@ -89,7 +89,7 @@ sessionStorage.setItem(
     <code>platform.json</code>. In that case the runtime calls <code>render()</code>
     on navigation to mount your UI, so you must export it:
   </p>
-  <textarea lang="ts">
+  <textarea lang="ts" data-linenumbers>
 export function render(
   container: HTMLElement,
   props: Record<string, unknown>
@@ -108,7 +108,7 @@ export function render(
     Toolkit packages are resolved at runtime through import maps. Declare them in
     <code>devDependencies</code>:
   </p>
-  <textarea lang="json">
+  <textarea lang="json" data-linenumbers>
 // package.json
 {
   "name": "@conqueso/fe-my-feature",
@@ -118,7 +118,7 @@ export function render(
   }
 }
 </textarea>
-  <textarea lang="ts">
+  <textarea lang="ts" data-linenumbers>
 // src/index.ts
 import { createStore } from "@fe/fe-store";
 

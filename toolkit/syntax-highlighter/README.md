@@ -73,6 +73,38 @@ registerLanguage("rust", [
 ]);
 ```
 
+### Line numbers
+
+Add the `data-linenumbers` boolean attribute to show line numbers:
+
+```html
+<textarea lang="ts" data-linenumbers>
+const x = 1;
+const y = 2;
+console.log(x + y);
+</textarea>
+```
+
+The same attribute works on `<pre class="lang-*">` blocks from markdown generators:
+
+```html
+<pre class="lang-ts" data-linenumbers><code>const x = 1;
+const y = 2;</code></pre>
+```
+
+Line numbers are rendered entirely by CSS via `::before { content: attr(data-linenumbers) }` — no extra DOM nodes are injected into the code. The count is computed as a by-product of the tokenizer pass and written as the attribute value. To keep numbers aligned, blocks with `data-linenumbers` scroll horizontally rather than wrap long lines.
+
+Four CSS custom properties control the appearance:
+
+| Property | Default | Controls |
+|---|---|---|
+| `--ln-width` | `2ch` | minimum width of the number column |
+| `--ln-color` | `currentColor` | color of the numbers |
+| `--ln-opacity` | `0.4` | opacity of the numbers |
+| `--ln-border` | `currentColor` | color of the divider line |
+
+Copy-pasting a highlighted block omits the line numbers — `user-select: none` on the `::before` pseudo-element prevents them from being selected.
+
 ### Themes
 
 Five themes ship as importable CSS strings:

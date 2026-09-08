@@ -270,7 +270,7 @@ never run `git diff origin/main..<branch>` without `--stat` or a path filter · 
 - **Formatting.** Code in backticks always. Shell commands in fenced blocks with `bash`. Concepts on first appearance in **bold**. Short tables over long prose lists when comparing things. No section-header comments in code blocks. Diagrams use Mermaid fenced blocks (`mermaid`).
 
 ## coding rules
-- source files: max 180 lines · split immediately when exceeded
+- source files: target 180 lines · treat as a soft guideline (σ≈5) not a hard cap · split when meaningfully exceeded, not to shave a handful of lines
 - comments: none unless logic is genuinely non-obvious · no section headers
 - functions over classes: default to functional patterns
 - no stubs or mocks: production-ready code only

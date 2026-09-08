@@ -85,7 +85,7 @@ import { store } from "@fe/fe-store";
     <code>platform.json</code>. When the runtime matches a URL to that entry, it imports
     the module and calls <code>render()</code> to mount the UI:
   </p>
-  <textarea lang="ts">
+  <textarea lang="ts" data-linenumbers>
 export function render(
   container: HTMLElement,
   props: Record<string, unknown>
@@ -175,7 +175,7 @@ fe dev mfe-a          # start dev server at localhost:3001
   <p>
     When a MFE depends on another, declare it in <code>devDependencies</code>:
   </p>
-  <textarea lang="json">
+  <textarea lang="json" data-linenumbers>
 // mfe-b/package.json
 {
   "name": "@conqueso/fe-mfe-b",

@@ -146,7 +146,7 @@ fe link mfe-b mfe-a
 </script>
 <script type="module" src="./src/index.ts"></script>
 </textarea>
-    <textarea lang="ts">
+    <textarea lang="ts" data-linenumbers>
 // host-app/src/index.ts
 import { load, loadDevtools } from "@fe/runtime";
 await loadDevtools();
@@ -157,7 +157,7 @@ await load(location.pathname);
     <p>
       Create <code>configs/fe.config.json</code> at the workspace root:
     </p>
-    <textarea lang="json">
+    <textarea lang="json" data-linenumbers>
 {
   "shellDir": "host-app",
   "manifestPath": "configs/platform.json",
@@ -314,7 +314,7 @@ fe serve
       <code>sources/</code> directory. Implement a <code>SourceStorage</code> adapter
       that reads from your artifact storage:
     </p>
-    <textarea lang="ts">
+    <textarea lang="ts" data-linenumbers>
 // @conqueso/fe-plugin-s3/src/index.ts
 import type { Plugin, CliContext } from "@fe/core";
 import { S3Client } from "@aws-sdk/client-s3";
@@ -351,7 +351,7 @@ export default {
       auth flows, or the shell can inject an auth context into each <code>render()</code>
       call via the <code>props</code> argument.
     </p>
-    <textarea lang="ts">
+    <textarea lang="ts" data-linenumbers>
 // host-app/src/index.ts
 import { load } from "@fe/runtime";
 import { getAuthState } from "./auth";
@@ -368,7 +368,7 @@ await load(location.pathname, {
     <p>
       To host multiple tenants on a single platform instance, use route prefixes:
     </p>
-    <textarea lang="json">
+    <textarea lang="json" data-linenumbers>
 {
   "routes": {
     "/tenant-a/": "@conqueso/fe-tenant-a-shell@1.0.0",

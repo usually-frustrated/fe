@@ -71,7 +71,7 @@ fe publish mfe-b
 // in both mfe-a and mfe-b package.json
 "devDependencies": { "@fe/fe-store": "^1.0.0" }
 </textarea>
-  <textarea lang="ts">
+  <textarea lang="ts" data-linenumbers>
 // mfe-a/src/index.ts
 import { createStore } from "@fe/fe-store";
 
@@ -85,7 +85,7 @@ export function render(container, props) {
   return () => container.removeChild(btn);
 }
 </textarea>
-  <textarea lang="ts">
+  <textarea lang="ts" data-linenumbers>
 // mfe-b/src/index.ts
 import { createStore } from "@fe/fe-store";
 
@@ -108,7 +108,7 @@ export function render(container, props) {
     If you need a JSX transform that is not covered by the built-in React and
     Solid.js plugins, you can write your own:
   </p>
-  <textarea lang="ts">
+  <textarea lang="ts" data-linenumbers>
 // @conqueso/fe-jit-plugin-preact/src/index.ts
 import type { JitPlugin } from "@fe/core";
 

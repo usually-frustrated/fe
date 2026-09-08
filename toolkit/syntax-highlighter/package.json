@@ -1,6 +1,6 @@
 {
   "name": "@feo/fe-syntax-highlighter",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "High-performance syntax highlighter using the CSS Custom Highlight API. Zero-DOM overhead, modular, and supporting TypeScript, JSON, Shell, and HTML. Auto-observes the DOM — import and done.",
   "license": "MIT",
   "type": "module",
