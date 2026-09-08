@@ -7,7 +7,7 @@ const version = rootPkg.version;
 
 console.log(`Syncing version ${version} to all packages...`);
 
-const packages = globSync("{packages,toolkit}/*/package.json");
+const packages = globSync("packages/*/package.json");
 
 for (const pkgPath of packages) {
   const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
