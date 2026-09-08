@@ -1,6 +1,6 @@
 import { render as renderA } from "@conqueso/fe-mfe-a";
 
-export function render(root: HTMLElement) {
+export function render(root: HTMLElement, props: Record<string, unknown>) {
   const container = document.createElement("div");
   container.style.border = "2px solid var(--accent)";
   container.style.padding = "1rem";
@@ -8,5 +8,10 @@ export function render(root: HTMLElement) {
   root.appendChild(container);
 
   const aRoot = container.querySelector("#mfe-a-root") as HTMLElement;
-  renderA(aRoot, { name: "MFE-B" });
+  const unmountA = renderA(aRoot, { name: (props.name as string) ?? "MFE-B" });
+
+  return () => {
+    unmountA();
+    container.remove();
+  };
 }
