@@ -127,7 +127,7 @@ webServer.command = [
 webServer.reuseExistingServer = !process.env.CI
 ```
 The tests use the legacy artifact path (`fe build + fe admin upload`) because the sandbox
-`fe-config.json` does not configure `jitPlugins`, so JIT compilation of SolidJS MFEs is not set up.
+`fe.config.json` does not configure `jitPlugins`, so JIT compilation of SolidJS MFEs is not set up.
 `bun run --cwd ../toolkit/devtools build` invokes the devtools package's own `build` script
 (`fe build toolkit/devtools`) since its entry is `src/index.tsx`, not `src/index.ts`.
 

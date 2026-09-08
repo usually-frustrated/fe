@@ -78,7 +78,7 @@ output: toolkit/devtools/dist/index.js
 
 ## upload + activation (legacy artifact path)
 Devtools uses the artifact upload path (`fe admin upload`) rather than JIT publish,
-because the sandbox does not configure `jitPlugins` in `fe-config.json`.
+because the sandbox does not configure `jitPlugins` in `fe.config.json`.
 
 ```
 # 1. Build

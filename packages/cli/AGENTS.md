@@ -3,7 +3,7 @@
 ↑ packages/core/AGENTS.md for all types/interfaces
 
 ## purpose
-`@fe/cli` v0.1.0 — the `fe` binary. Bootstraps context, loads plugins, dispatches commands.
+`@fe/cli` v0.2.3 — the `fe` binary. Bootstraps context, loads plugins, dispatches commands.
 Published. Entry: `src/index.ts` → dispatches to `ctx.commands`. Bin alias: `fe`.
 
 ## src/ file map
@@ -14,7 +14,7 @@ src/
   plugin-loader.ts                   dynamic import() of external plugin npm packages
   helpers.ts                         readPackageMeta · readFeDepKeys · readFeDeps · slugFromSpecifier · isMfeSpecifier
   adapters/
-    json-config-provider.ts          ConfigProvider: reads configs/fe-config.json
+    json-config-provider.ts          ConfigProvider: reads configs/fe.config.json
     json-manifest-manager.ts         ManifestManager: reads/writes configs/platform.json
     local-source-storage.ts          SourceStorage: cp src/→sources/<slug>/<ver>/
     local-artifact-storage.ts        ArtifactStorage: cp dist/→uploads/<slug>/<ver>/
@@ -57,7 +57,7 @@ CLI plugins added before step 6 can push to `ctx.jitPlugins` in their `setup()`.
 ```ts
 createJsonConfigProvider(root: string): ConfigProvider
 ```
-Reads `<root>/configs/fe-config.json`. This is the default used at bootstrap.
+Reads `<root>/configs/fe.config.json`. This is the default used at bootstrap.
 
 Returns `Required<FeConfig>` with defaults merged:
 ```
@@ -148,7 +148,7 @@ fe new <scope/name>
 ### check (plugins/check.ts)
 ```
 fe check <target|shell>
-  tsc --noEmit (via bun x tsc --project <dir>/tsconfig.json)
+  tsgo --noEmit (via bun x tsgo --project <dir>/tsconfig.json)
   Bun.build simulation (tries src/index.ts first, falls back to src/index.tsx)
   applies build:options waterfall (same as real build)
   exits 0 on pass · exits 1 on first failure

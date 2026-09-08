@@ -29,7 +29,7 @@ fe serve
 before `fe publish`; the pre-flight check inside `publish` is sufficient.
 
 Devtools uses the legacy artifact path (`fe build + fe admin upload`) because the sandbox
-`fe-config.json` does not configure `jitPlugins` for Solid.js JIT compilation.
+`fe.config.json` does not configure `jitPlugins` for Solid.js JIT compilation.
 
 ## Developing an MFE in isolation
 
@@ -74,9 +74,9 @@ For packages in separate repositories, replace `file:../mfe-a` with a git URI ma
 "@conqueso/fe-mfe-a": "git+https://github.com/org/mfe-a#v1.0.0"
 ```
 
-## CLI config (`sandbox/configs/fe-config.json`)
+## CLI config (`sandbox/configs/fe.config.json`)
 
-The CLI reads its own config through the `ConfigProvider` adapter (`ctx.adapters.config`). The default implementation reads `configs/fe-config.json` relative to the workspace root. All fields are optional:
+The CLI reads its own config through the `ConfigProvider` adapter (`ctx.adapters.config`). The default implementation reads `configs/fe.config.json` relative to the workspace root. All fields are optional:
 
 ```json
 {

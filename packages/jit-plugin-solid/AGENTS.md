@@ -3,8 +3,8 @@
 ↑ packages/core/AGENTS.md for JitPlugin interface
 
 ## purpose
-`@fe/jit-plugin-solid` v0.1.0 — JIT plugin for Solid.js MFEs.
-Published. Add to `FeConfig.jitPlugins` in `fe-config.json` to enable Solid.js JSX compilation.
+`@fe/jit-plugin-solid` v0.2.3 — JIT plugin for Solid.js MFEs.
+Published. Add to `FeConfig.jitPlugins` in `fe.config.json` to enable Solid.js JSX compilation.
 
 ## what it does
 Appends `SolidPlugin()` from `bun-plugin-solid` to `BuildOptions.plugins`.
@@ -29,7 +29,7 @@ export { jitPlugin };
 
 ## usage
 ```json
-// configs/fe-config.json
+// configs/fe.config.json
 { "jitPlugins": ["@fe/jit-plugin-solid"] }
 ```
 

@@ -7,25 +7,35 @@ CLAUDE.md→symlink→here
 ```
 / (nx monorepo · workspaces: packages/* sandbox/* toolkit/*)
 ├─ packages/
-│  ├─ core/             @fe/core              v0.1.0  shared types + interfaces (published)
-│  ├─ cli/              @fe/cli               v0.1.0  build/serve/dev/admin CLI (published · bin: fe)
-│  ├─ runtime/          @fe/runtime           v0.1.0  browser platform loader (published)
-│  ├─ compiler/         @fe/compiler          v1.0.0  MFE bundler + JIT bundler (published)
-│  ├─ specifier/        @fe/specifier         v0.1.0  MFE specifier utilities (published)
-│  └─ jit-plugin-solid/ @fe/jit-plugin-solid  v0.1.0  JIT plugin: Solid.js JSX (published)
+│  ├─ core/             @fe/core              v0.2.3  shared types + interfaces (published)
+│  ├─ cli/              @fe/cli               v0.2.3  build/serve/dev/admin CLI (published · bin: fe)
+│  ├─ runtime/          @fe/runtime           v0.2.3  browser platform loader (published)
+│  ├─ compiler/         @fe/compiler          v0.2.3  MFE bundler + JIT bundler (published)
+│  ├─ specifier/        @fe/specifier         v0.2.3  MFE specifier utilities (published)
+│  └─ jit-plugin-solid/ @fe/jit-plugin-solid  v0.2.3  JIT plugin: Solid.js JSX (published)
 ├─ sandbox/                                           example workspace (not published)
 │  ├─ host-app/         name=host-app                 shell using @fe/runtime · builds to host-app/dist/
-│  ├─ mfe-a/            name=@conqueso/fe-mfe-a           standalone MFE · MFE-deps=∅
+│  ├─ mfe-a/            name=@conqueso/fe-mfe-a           standalone MFE (React example) · MFE-deps=∅
 │  ├─ mfe-b/            name=@conqueso/fe-mfe-b           composes mfe-a · devDep→@conqueso/fe-mfe-a
-│  └─ configs/          fe-config.json · platform.json · routes+packages registry + CLI config
+│  └─ configs/          fe.config.json · platform.json · routes+packages registry + CLI config
 ├─ toolkit/                                           reusable tools and low-dependency MFEs
-│  ├─ devtools/         name=@fe/fe-devtools        overlay · uses Solid.js
-│  ├─ store/            name=@fe/fe-store           global state primitive · zero deps
-│  └─ network/          name=@fe/fe-network         shared fetch · dedup + cache + interceptors
+│  ├─ devtools/         name=@fe/fe-devtools          overlay · uses Solid.js
+│  ├─ store/            name=@fe/fe-store             global state primitive · zero deps
+│  ├─ network/          name=@fe/fe-network           shared fetch · dedup + cache + interceptors
+│  ├─ syntax-highlighter/ name=@feo/fe-syntax-highlighter  CSS Custom Highlight API · zero-DOM (published)
+│  └─ web-components/   name=@feo/fe-web-components   html-include · fe-component · fe-compose (published)
 ├─ nx.json              minimal Nx config (target ordering only · no nx cloud)
 └─ package.json         workspace root
 ```
 each package/subdir has own AGENTS.md with full local detail
+
+> Version note: `packages/*` versions are force-synced to the root `package.json`
+> version (0.2.3) by `scripts/sync-versions.ts` (runs on `postinstall`). Do not
+> hand-edit per-package versions; bump the root and reinstall.
+
+> Scope note: `@fe/*` = platform infrastructure; `@feo/*` = standalone published
+> toolkit (syntax-highlighter, web-components). MFEs live under org scopes like
+> `@conqueso/*`. All three share the `fe-` name-prefix convention.
 
 ## toolchain
 bun@latest ONLY · !node !npm !webpack !vite !rollup
@@ -51,7 +61,7 @@ runtime: browser import maps resolve bare-specifier → JS url (multiple maps, i
 export function render(container:HTMLElement,props:Record<string,unknown>):()=>void
 //                                                                         ↑ unmount/cleanup
 ```
-!framework · DOM-only · return removes own DOM nodes (devtools/ exception: uses Solid.js)
+!framework-required · DOM-only is a valid choice · return cleanup removes own DOM nodes (framework MFEs opt in via jit-plugins; devtools uses Solid.js)
 
 ## CLI (`@fe/cli` · `fe <cmd>` from workspace root)
 ```
@@ -63,10 +73,10 @@ admin  upload <tgt>    cp dist/→uploads/slug/ver/ · register in platform.json
 check  <target>|shell  typecheck + simulate build (CI use)
 ```
 CLI config is supplied by `ctx.adapters.config` (ConfigProvider adapter).
-Default impl reads `configs/fe-config.json` at workspace root. Plugins may swap this adapter.
+Default impl reads `configs/fe.config.json` at workspace root. Plugins may swap this adapter.
 
 ## @fe/cli Plugin API
-Organizations extend the CLI by adding plugins in `configs/fe-config.json`:
+Organizations extend the CLI by adding plugins in `configs/fe.config.json`:
 ```json
 { "plugins": ["@conqueso/fe-plugin-s3"] }
 ```
@@ -94,7 +104,7 @@ Plugins run after builtins so they can freely swap `ctx.adapters.*`.
   "shellDir":     "shell"                  // host application directory (sandbox: "host-app")
 }
 ```
-File lives at `configs/fe-config.json` (co-located with platform.json).
+File lives at `configs/fe.config.json` (co-located with platform.json).
 All fields optional; defaults apply when file is absent.
 Plugins access config via `ctx.adapters.config.get()`, NOT by reading the file directly.
 
@@ -221,7 +231,7 @@ Exceptions:
 - !bundle @scope/fe-* · must stay external · importmap resolves runtime
 - admin-upload writes to packages only, never routes
 - routes updated manually or by CD pipeline
-- !framework-deps · DOM only (exception: devtools/ bundles Solid.js internally)
+- !framework-deps in platform core (packages/*) · framework support is opt-in via jit-plugins + framework devDeps (React/Solid example MFEs; devtools bundles Solid.js)
 - MFE devDeps → devDependencies only
 - sandbox/ is !published · packages/* are published
 - multiple import maps: deps injected lazily, deduped via versioned resolution
