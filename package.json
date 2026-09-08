@@ -11,6 +11,7 @@
     "sandbox:build": "nx run-many -t build --projects=sandbox-*"
   },
   "devDependencies": {
+    "@fe/cli": "workspace:*",
     "@playwright/test": "1.56.1",
     "@types/node": "^25.3.0",
     "glob": "^13.0.6",
